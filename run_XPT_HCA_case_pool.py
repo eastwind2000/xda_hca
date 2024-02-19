@@ -54,11 +54,11 @@ if __name__ == "__main__":
 
             print(cmdbufr)
 
-            os.system(cmdbufr)            
+            # os.system(cmdbufr)            
             # breakpoint()
 
-    #         pool.apply_async( met_cmd_exec, (cmdbufr, ) )  # Adding parallel jobs into pool            #! pay attention (cmdbufr, ) "," can not be ignored
-    # pool.close()    
-    # pool.join()
+            pool.apply_async( met_cmd_exec, (cmdbufr, ) )  # Adding parallel jobs into pool            #! pay attention (cmdbufr, ) "," can not be ignored
+    pool.close()    
+    pool.join()
 
 

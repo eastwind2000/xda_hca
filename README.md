@@ -1,5 +1,5 @@
 # X-band weather radar testing
-- X-band weather radar products testing: REF, VEL, ZDR, KDP, CC and HCA, etc.
+- Beijing X-band weather radar products testing: REF, VEL, ZDR, KDP, CC and HCA, etc.
 
 # Reflectivity
 ![REF](./sample_fig/ZA001_RDA_parameter_20230731020300_ref_swp00.png)
