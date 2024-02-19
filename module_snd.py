@@ -1,20 +1,70 @@
 
+import pandas as pd
+
 import numpy as np
 
-# from skewPy import SkewT
-# from skewt import SkewT 
-# import xarray as xr
-# from scipy import interpolate
-# from CSU_RadarTools.csu_radartools import csu_fhc
+"""
+! waiting for fix , sounding-radar coehence
+"""   
 
-import warnings 
+def setup_snd(snd_fname):
 
-import pdb
+    """
+    ! waiting for fix , sounding-radar coehence
+    """   
+
+    txtbufr = pd.read_csv(snd_fname,  header=None, skiprows=1, sep="\\s+")
+    
+    txtbufr.columns=("pressure", "hght", "temp", "dwpt", "wind_direction", "wind_speed")
+
+    txtbufr['hght'] = txtbufr['hght']*10
+
+    # cond_qc
+
+    print("")
+    print(["sounding data: ", snd_fname])
+    print(txtbufr)
+    
+    return txtbufr
 
 
-warnings.filterwarnings("ignore")
+def interpolate_sounding_to_radar(sounding, radar):
+    """Takes sounding data and interpolates it to every radar gate."""
+    radar_z = get_z_from_radar(radar)
+    radar_T = None
+    snd_T, snd_z = check_sounding_for_montonic(sounding)
+    shape = np.shape(radar_z)
+    rad_z1d = radar_z.ravel()
+    rad_T1d = np.interp(rad_z1d, snd_z, snd_T)
+    return np.reshape(rad_T1d, shape), radar_z
 
-# ========================================================================================
+def check_sounding_for_montonic(sounding):
+    """
+    So the sounding interpolation doesn't fail, force the sounding to behave
+    monotonically so that z always increases. This eliminates data from
+    descending balloons.
+    """
+    snd_T = sounding['temp']  # In old SkewT, was sounding.data
+    snd_z = sounding['hght']  # In old SkewT, was sounding.data
+    dummy_z = []
+    dummy_T = []
+    #print(snd_T.mask)
+    # if not snd_T.mask.all(): #May cause issue for specific soundings
+    dummy_z.append(snd_z[0])
+    dummy_T.append(snd_T[0])
+    for i, height in enumerate(snd_z):
+        if i > 0:
+            if snd_z[i] > snd_z[i-1]:
+                if np.isfinite(snd_z[i]) and np.isfinite(snd_T[i]):
+                    #print(snd_T[i])
+                    dummy_z.append(snd_z[i])
+                    dummy_T.append(snd_T[i])
+    snd_z = np.array(dummy_z)
+    snd_T = np.array(dummy_T)
+    # else:
+    #     print('uh-oh. sounding problem')
+    # pdb.set_trace()
+    return snd_T, snd_z
 
 
 def get_z_from_radar(radar):
@@ -77,26 +127,3 @@ def radar_coords_to_cart(rng, az, ele, debug=False):
     x = s * np.sin(theta_a)
     y = s * np.cos(theta_a)
     return x, y, z
-
-
-def add_field_to_radar_object(field, radar, field_name='FH', units='unitless', 
-                              long_name='Hydrometeor ID', standard_name='Hydrometeor ID',
-                              dz_field='CZ'):
-    """
-    Adds a newly created field to the Py-ART radar object. If reflectivity is a masked array,
-    make the new field masked the same as reflectivity.
-    """
-    fill_value = -32768
-    masked_field = np.ma.asanyarray(field)
-    masked_field.mask = masked_field == fill_value
-    if hasattr(radar.fields[dz_field]['data'], 'mask'):
-        setattr(masked_field, 'mask', 
-                np.logical_or(masked_field.mask, radar.fields[dz_field]['data'].mask))
-        fill_value = radar.fields[dz_field]['_FillValue']
-    field_dict = {'data': masked_field,
-                  'units': units,
-                  'long_name': long_name,
-                  'standard_name': standard_name,
-                  '_FillValue': fill_value}
-    radar.add_field(field_name, field_dict, replace_existing=True)
-    return radar
