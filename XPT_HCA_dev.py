@@ -62,8 +62,6 @@ plot_radius = xpar_radius  #! units in km
 
 #
 #
-# rdafname = "//home/lse/haikui_tc2311/data/xrda/ZG003/Z_RADR_I_ZG003_20230907060004_O_DOR_AXPT0364_CRA_FMT.bin"
-
 # ===============================================================================
 #
 

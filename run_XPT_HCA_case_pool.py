@@ -6,17 +6,11 @@ import multiprocessing
 import pdb
 
 # =================================================================================
-# adding commenets and git version control
+# @Author: chentao@cma.gov.cn
+# @Date: 2024-02-19 21:01:16
+# @Version: 0.0.1
+# @Description: X-band weather radar products testing
 # =================================================================================
-
-# ============================================== 2024-01-25 16:23:00 by chentao@cma.gov.cn
-
-# rdafname = "//home/lse/haikui_tc2311/data/xrda/ZG003/Z_RADR_I_ZG003_20230907060004_O_DOR_AXPT0364_CRA_FMT.bin"
-# rdafname = "/home/lse/haikui_tc2311/data/xrda/ZG000/Z_RADR_I_ZG000_20230907060007_O_DOR_AXPT0364_CRA_FMT.bin"
-
-# ===============================================================================================
-
-# xrda_datadir  =  "/home/lse/haikui_tc2311/data/xrda/  #! TC2311 Haikui, X-band phased-array radar
 
 # /home/lse/237rainstorm/data/xrdas/ZA001/Z_RADR_I_ZA001_20230730000000_O_DOR_YLD2-D_CAP_FMT.bin.bz2  #! Beijing 23.7 rainstorm, VP23D, X-band
 
