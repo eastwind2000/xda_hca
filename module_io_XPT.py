@@ -521,10 +521,3 @@ def compose_var_sweep(pdbufr, varname, cut_index):
     return var
 
 # -============================================================================================
-
-# rdafname = "//home/lse/haikui_tc2311/data/xrda/ZG003/Z_RADR_I_ZG003_20230907060004_O_DOR_AXPT0364_CRA_FMT.bin"
-# rdafname = "/home/lse/haikui_tc2311/data/xrda/ZG000/Z_RADR_I_ZG000_20230907060007_O_DOR_AXPT0364_CRA_FMT.bin"
-
-# fbufr = AXPT_Data(rdafname)
-
-# breakpoint()

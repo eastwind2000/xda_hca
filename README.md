@@ -13,6 +13,5 @@
 # KDP
 ![KDP](./sample_fig/ZA001_RDA_parameter_20230731020300_kdp_swp00.png)
 
-
-# Radar section
+# Section
 ![SEC](./sample_fig/ZA001_HCA_SEC_20230731020300_sec_210.png)

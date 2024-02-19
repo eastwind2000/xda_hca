@@ -16,8 +16,6 @@ import pyart
 
 from cinrad.io.level2 import StandardData
 
-# from cinrad.io
-
 from module_io_XPT import XPT_DATA
 
 from module_io_defineXPT import FillValue
@@ -226,7 +224,8 @@ def XPT_to_pyart(f: XPT_DATA, radius: int = 60, mom_kind: str = "LOG") -> pyart.
 
 
 def standard_data_to_pyart(f: StandardData, radius: int = 460) -> pyart.core.Radar:
-    filemetadata = pyart.config.FileMetadata("cinrad standard")
+
+    filemetadata = pyart.config.FileMetadata("CINRAD Standard")
     time = filemetadata("time")
     time["calendar"] = "standard"
     time["units"] = "seconds since 1970-01-01 00:00"
