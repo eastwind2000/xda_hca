@@ -1,4 +1,4 @@
-# X-band weather radar testing
+# X-band weather radar testing code
 - Beijing X-band weather radar products testing: REF, VEL, ZDR, KDP, CC and HCA, etc.
 
 # Reflectivity
